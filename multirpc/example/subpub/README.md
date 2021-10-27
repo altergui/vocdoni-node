@@ -32,7 +32,7 @@ DEBUG   subpub/discovery.go:15  searching for SubPub group identity b935f02bc281
 INFO    subpub/discovery.go:95  advertising topic b935f02bc28165df3076ccd945fb70b0eed26b2902961c8222fcb4b9dd555aa8
 ```
 
-Subpub is doing the p2p bootstraping and discovery using a shared secret between client and server (`sharedSecret123`), all data transfered will be encrypted using this key thus only nodes knowing the key will be able to join the p2p subnetwork.
+Subpub is doing the p2p bootstraping and discovery using a shared secret between client and server (`sharedSecret123`), all data transferred will be encrypted using this key thus only nodes knowing the key will be able to join the p2p subnetwork.
 
 Same as the HTTP+WS example, we add three handlers to the server, `hello`, `addkey` and `getsecret` which will be transparently handled by the router (no matter which transport we use).
 

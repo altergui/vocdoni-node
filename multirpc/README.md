@@ -3,7 +3,7 @@
 A JSON driven, signature ready, flexible and modular RPC stack for multiple transports.
 
 This GoLang module provides a full stack for implementing a flexible RPC service.
-The same mux router could be used for providing service to multiple network transports in paralel.
+The same mux router could be used for providing service to multiple network transports in parallel.
 
 The aim for multirpc is to provide and easy way to implement an RPC communication over any transport layer, 
 using the same JSON structure and signature schema.
