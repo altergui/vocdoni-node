@@ -1,0 +1,49 @@
+---
+name: testground ipfsSync
+
+on:
+  push:
+    paths:
+      - 'cmd/ipfsSync/**'
+      - 'ipfssync/**'
+  pull_request:
+    paths:
+      - 'cmd/ipfsSync/**'
+      - 'ipfssync/**'
+
+jobs:
+  testground-ipfssync-ok:
+    runs-on: [self-hosted, testground]
+    if: github.repository == 'vocdoni/vocdoni-node'
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Run compose script
+        run: |
+          export COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1
+          export DOCKER_CLI_EXPERIMENTAL=enabled
+          export COMPOSE_PROJECT_NAME=${RANDOM}${RANDOM}_testsuite
+          export TESTSUITE_BUILD_TAG=${CI_COMMIT_SHA::10}
+          export COMPOSE_HOST_PATH=${PWD}/dockerfiles/testsuite
+          export COMPOSE_DVOTE_PORT_MAPPING="9090" # Will use a random available port mapping
+          cd dockerfiles/testsuite
+          docker-compose build
+          ./start_test.sh
+
+  testground-ipfssync-fail:
+    runs-on:  [self-hosted, testground]
+    if: github.repository == 'vocdoni/vocdoni-node'
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Run compose script
+        run: |
+          export COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1
+          export DOCKER_CLI_EXPERIMENTAL=enabled
+          export COMPOSE_PROJECT_NAME=${RANDOM}${RANDOM}_testsuite
+          export TESTSUITE_BUILD_TAG=${CI_COMMIT_SHA::10}
+          export COMPOSE_HOST_PATH=${PWD}/dockerfiles/testsuite
+          export COMPOSE_DVOTE_PORT_MAPPING="9090" # Will use a random available port mapping
+          cd dockerfiles/testsuite
+          docker-compose build
+          ./start_test.sh
