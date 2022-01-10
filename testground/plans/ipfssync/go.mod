@@ -2,7 +2,7 @@ module github.com/altergui/vocdoni/testsuite/ipfssync
 
 go 1.16
 
-replace go.vocdoni.io/dvote => github.com/altergui/vocdoni-node v1.0.4-0.20220104104515-a730935c0d45
+replace go.vocdoni.io/dvote => github.com/altergui/vocdoni-node v1.0.4-0.20220109225606-52597ee4373a
 
 require (
 	github.com/spf13/pflag v1.0.5
