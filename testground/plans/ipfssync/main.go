@@ -199,7 +199,7 @@ func routeFilter(action network.FilterAction) run.TestCaseFn {
 		runenv.RecordMessage("my ip is %s and I am in region %s", ip, me.Region)
 
 		// instead of blocking forever, sleep for RunDuration
-		time.Sleep(RunDuration)
+		//time.Sleep(RunDuration)
 
 		// publish my address so other nodes know how to reach me.
 		nodeTopic := sync.NewTopic("nodes", node{})
