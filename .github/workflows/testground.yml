@@ -21,4 +21,9 @@ jobs:
       - name: Run testground
         run: |
           export TESTGROUND_HOME=./testground/
-          testground run single --plan=ipfssync --testcase=accept --builder=docker:go --runner=local:docker --instances=5
+          testground run single --wait \
+            --plan=ipfssync \
+            --testcase=accept \
+            --builder=docker:go \
+            --runner=local:docker \
+            --instances=5
