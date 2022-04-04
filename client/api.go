@@ -1105,7 +1105,7 @@ func (c *Client) CreateProcess(oracle *ethereum.SignKeys,
 		MaxCensusSize: &maxCensusSize,
 	}
 	// get oracle account
-	acc, err := c.GetAccount(oracle, oracle.Address())
+	acc, err := c.GetAccount(oracle.Address())
 	if err != nil {
 		return 0, fmt.Errorf("cannot get account")
 	}
@@ -1159,7 +1159,7 @@ func (c *Client) EndProcess(oracle *ethereum.SignKeys, pid []byte) error {
 	req.Method = "submitRawTx"
 	status := models.ProcessStatus_ENDED
 	// get oracle account
-	acc, err := c.GetAccount(oracle, oracle.Address())
+	acc, err := c.GetAccount(oracle.Address())
 	if err != nil {
 		return fmt.Errorf("cannot get account")
 	}

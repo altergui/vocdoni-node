@@ -127,6 +127,7 @@ func main() {
 
 	// init accounts
 	// entityKey == treasurerKey
+	log.Infof("initializing accounts ...")
 	if err := initAccounts(treasurerKey, oracleKey, entityKey, *host); err != nil {
 		log.Fatalf("cannot init accounts: %w", err)
 	}
@@ -294,24 +295,26 @@ func initAccounts(treasurer, oracle, mainSigner *ethereum.SignKeys, host string)
 	if err := ensureAccountExists(mainClient, oracle, retries); err != nil {
 		log.Fatal(err)
 	}
+	log.Infof("created oracle account with address %s", oracle.Address())
 	if err := ensureAccountExists(mainClient, mainSigner, retries); err != nil {
 		log.Fatal(err)
 	}
-
+	log.Infof("created main signer account with address: %s", mainSigner.Address())
 	if err := ensureAccountHasTokens(mainClient, treasurer, oracle.Address(), 100000, retries); err != nil {
 		log.Fatalf("cannot mint tokens for account %s with treasurer %s: %w", oracle.Address(), treasurer.Address(), err)
 	}
+	log.Infof("minted 100000 tokens to oracle")
 	if err := ensureAccountHasTokens(mainClient, treasurer, mainSigner.Address(), 100000, retries); err != nil {
 		log.Fatalf("cannot mint tokens for account %s with treasurer %s: %w", mainSigner.Address(), treasurer.Address(), err)
 	}
-
+	log.Infof("minted 100000 tokens to main signer")
 	return nil
 }
 
 func ensureAccountExists(mainClient *client.Client, account *ethereum.SignKeys, retries int) error {
 	for i := 0; i <= retries; i++ {
 		// if account exists, we're done
-		if acct, _ := mainClient.GetAccount(nil, account.Address()); acct != nil {
+		if acct, _ := mainClient.GetAccount(account.Address()); acct != nil {
 			return nil
 		}
 		if i == retries { // that was the last chance, break and fail immediately
@@ -338,7 +341,7 @@ func ensureAccountHasTokens(mainClient *client.Client,
 	retries int) error {
 	for i := 0; i <= retries; i++ {
 		// if balance is enough, we're done
-		if acct, _ := mainClient.GetAccount(nil, accountAddr); acct != nil && acct.Balance >= amount {
+		if acct, _ := mainClient.GetAccount(accountAddr); acct != nil && acct.Balance >= amount {
 			return nil
 		}
 		if i == retries { // that was the last chance, break and fail immediately
@@ -346,7 +349,7 @@ func ensureAccountHasTokens(mainClient *client.Client,
 		}
 
 		// else, try to mint with treasurer
-		treasurerAccount, err := mainClient.GetTreasurer(treasurer)
+		treasurerAccount, err := mainClient.GetTreasurer()
 		if err != nil {
 			return fmt.Errorf("cannot get treasurer: %w", err)
 		}

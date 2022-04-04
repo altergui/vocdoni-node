@@ -45,6 +45,8 @@ merkle_vote() {
 		  --logLevel=$LOGLEVEL \
 		  --operation=vtest \
 		  --oracleKey=$ORACLE_KEY \
+		  --treasurerKey=$TREASURER_KEY \
+		  --entityKey=$ENTITY_KEY \
 		  --electionSize=$ELECTION_SIZE \
 		  --electionType=$1 \
 		  --withWeight=2
@@ -64,6 +66,8 @@ anonvoting() {
 		  --logLevel=$LOGLEVEL \
 		  --operation=anonvoting \
 		  --oracleKey=$ORACLE_KEY \
+		  --treasurerKey=$TREASURER_KEY \
+		  --entityKey=$ENTITY_KEY \
 		  --electionSize=$ELECTION_SIZE_ANON
 }
 
@@ -73,6 +77,8 @@ cspvoting() {
 		  --logLevel=$LOGLEVEL \
 		  --operation=cspvoting \
 		  --oracleKey=$ORACLE_KEY \
+		  --treasurerKey=$TREASURER_KEY \
+		  --entityKey=$ENTITY_KEY \
 		  --electionSize=$ELECTION_SIZE
 }
 
@@ -126,7 +132,7 @@ for test in ${tests_to_run[@]} ; do
 	else
 		echo "Vochain test $test failed!"
 		echo "### Post run logs ###"
-		docker-compose logs --tail 1000
+		#docker-compose logs
 		break
 	fi
 done

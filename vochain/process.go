@@ -434,7 +434,7 @@ func (app *BaseApplication) NewProcessTxCheck(vtx *models.Tx, txBytes,
 			return nil, common.Address{}, err
 		}
 		if !isOracle {
-			return nil, common.Address{}, fmt.Errorf("unauthorized to set process status, recovered addr is %s", addr.Hex())
+			return nil, common.Address{}, fmt.Errorf("unauthorized to create a new process, recovered addr is %s", addr.Hex())
 		}
 	}
 	// get process
