@@ -49,7 +49,7 @@ merkle_vote() {
 		  --electionSize=$ELECTION_SIZE \
 		  --electionType=$1 \
 		  --withWeight=2
-;}
+}
 
 merkle_vote_plaintext() {
 	merkle_vote poll-vote
@@ -67,7 +67,7 @@ anonvoting() {
 		  --oracleKey=$ORACLE_KEY \
 		  --treasurerKey=$TREASURER_KEY \
 		  --electionSize=$ELECTION_SIZE_ANON
-;}
+}
 
 cspvoting() {
 	docker-compose run test timeout 300 \
@@ -77,7 +77,7 @@ cspvoting() {
 		  --oracleKey=$ORACLE_KEY \
 		  --treasurerKey=$TREASURER_KEY \
 		  --electionSize=$ELECTION_SIZE
-;}
+}
 
 tokentransactions() {
 	docker-compose run test timeout 300 \
@@ -85,8 +85,8 @@ tokentransactions() {
 		  --logLevel=$LOGLEVEL \
 		  --operation=tokentransactions \
 		  --oracleKey=$ORACLE_KEY \
-		  --treasurerKey=$TREASURER_KEY \
-;}
+		  --treasurerKey=$TREASURER_KEY
+}
 
 ### end tests definition
 
