@@ -81,7 +81,7 @@ func newConfig(logLevel, output string) zap.Config {
 		LineEnding:    zapcore.DefaultLineEnding,
 		EncodeLevel:   zapcore.CapitalColorLevelEncoder,
 		EncodeTime: func(ts time.Time, encoder zapcore.PrimitiveArrayEncoder) {
-			encoder.AppendString(ts.Local().Format(time.RFC3339))
+			encoder.AppendString(ts.Local().Format("2006-01-02T15:04:05.000Z07:00"))
 		},
 		EncodeDuration: zapcore.SecondsDurationEncoder,
 		EncodeCaller:   zapcore.ShortCallerEncoder,
