@@ -1084,6 +1084,7 @@ func (c *Client) CreateProcess(oracle *ethereum.SignKeys,
 		}
 		startBlock = current + uint32(startBlockIncrement)
 	}
+	log.Warn(c.GetCurrentBlock()) //debug
 
 	var req api.APIrequest
 	req.Method = "submitRawTx"
@@ -1148,6 +1149,7 @@ func (c *Client) CreateProcess(oracle *ethereum.SignKeys,
 				return p.StartBlock, nil
 			}
 		}
+		log.Warn(c.GetCurrentBlock()) //debug
 		return 0, fmt.Errorf("process was not created")
 	}
 	return startBlock, nil
