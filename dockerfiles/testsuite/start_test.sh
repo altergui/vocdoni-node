@@ -46,11 +46,10 @@ merkle_vote() {
 		  --operation=vtest \
 		  --oracleKey=$ORACLE_KEY \
 		  --treasurerKey=$TREASURER_KEY \
-		  --entityKey=$ENTITY_KEY \
 		  --electionSize=$ELECTION_SIZE \
 		  --electionType=$1 \
 		  --withWeight=2
-}
+;}
 
 merkle_vote_plaintext() {
 	merkle_vote poll-vote
@@ -67,9 +66,8 @@ anonvoting() {
 		  --operation=anonvoting \
 		  --oracleKey=$ORACLE_KEY \
 		  --treasurerKey=$TREASURER_KEY \
-		  --entityKey=$ENTITY_KEY \
 		  --electionSize=$ELECTION_SIZE_ANON
-}
+;}
 
 cspvoting() {
 	docker-compose run test timeout 300 \
@@ -78,9 +76,8 @@ cspvoting() {
 		  --operation=cspvoting \
 		  --oracleKey=$ORACLE_KEY \
 		  --treasurerKey=$TREASURER_KEY \
-		  --entityKey=$ENTITY_KEY \
 		  --electionSize=$ELECTION_SIZE
-}
+;}
 
 tokentransactions() {
 	docker-compose run test timeout 300 \
@@ -89,8 +86,7 @@ tokentransactions() {
 		  --operation=tokentransactions \
 		  --oracleKey=$ORACLE_KEY \
 		  --treasurerKey=$TREASURER_KEY \
-		  --entityKey=$ENTITY_KEY
-}
+;}
 
 ### end tests definition
 
