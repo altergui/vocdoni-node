@@ -25,7 +25,7 @@ func (c *HTTPclient) Election(electionID types.HexBytes) (*api.Election, error) 
 	}
 	election := &api.Election{}
 	if err = json.Unmarshal(resp, election); err != nil {
-		return nil, fmt.Errorf("could not unmarshal response: %w", err)
+		return nil, fmt.Errorf("%w: %w", ErrUnmarshalFailed, err)
 	}
 	return election, nil
 }
@@ -359,7 +359,7 @@ func (c *HTTPclient) ElectionResults(electionID types.HexBytes) (*api.ElectionRe
 	}
 	electionResults := &api.ElectionResults{}
 	if err = json.Unmarshal(resp, &electionResults); err != nil {
-		return nil, fmt.Errorf("could not unmarshal response: %w", err)
+		return nil, fmt.Errorf("%w: %w", ErrUnmarshalFailed, err)
 	}
 	return electionResults, nil
 }

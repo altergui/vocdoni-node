@@ -21,11 +21,6 @@ const (
 	DefaultDevelopmentFaucetToken = "158a58ba-bd3e-479e-b230-2814a34fae8f"
 )
 
-var (
-	// ErrAccountNotConfigured is returned when the client has not been configured with an account.
-	ErrAccountNotConfigured = fmt.Errorf("account not configured")
-)
-
 // Treasurer returns the treasurer address.
 func (c *HTTPclient) Treasurer() (*api.Account, error) {
 	resp, code, err := c.Request(HTTPGET, nil, "accounts", "treasurer")

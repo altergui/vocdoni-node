@@ -110,7 +110,7 @@ func (c *HTTPclient) SetHostAddr(addr *url.URL) error {
 	}
 	info := &api.ChainInfo{}
 	if err := json.Unmarshal(data, info); err != nil {
-		return fmt.Errorf("cannot get chain ID from API server")
+		return fmt.Errorf("%w: %w", ErrUnmarshalFailed, err)
 	}
 	c.chainID = info.ID
 	return nil
