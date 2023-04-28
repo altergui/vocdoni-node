@@ -102,6 +102,11 @@ jobs:
         env:
           LOG_PANIC_ON_INVALIDCHARS: true # check that log lines contains no invalid chars (evidence of format mismatch)
         run: go test -coverprofile=unit.covdata.txt -vet=off -timeout=15m -race ./... # note that -race can easily make the crypto stuff 10x slower
+      - name: Archive code coverage (unit test)
+        uses: actions/upload-artifact@v3
+        with:
+          name: unit-code-coverage
+          path: unit.covdata.txt
       - name: Send unit test coverage to coveralls.io
         uses: shogo82148/actions-goveralls@v1
         with:
@@ -144,6 +149,11 @@ jobs:
           CONCURRENT: 1 # run all the start_test.sh tests concurrently
         run: |
           cd dockerfiles/testsuite && ./start_test.sh
+      - name: Archive code coverage (integration test)
+        uses: actions/upload-artifact@v3
+        with:
+          name: integration-code-coverage
+          path: dockerfiles/testsuite/gocoverage/covdata.txt
       - name: Send integration test coverage to coveralls.io
         uses: shogo82148/actions-goveralls@v1
         with:
